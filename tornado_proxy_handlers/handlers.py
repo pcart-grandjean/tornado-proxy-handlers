@@ -1,5 +1,7 @@
 import os
 import os.path
+from urllib.parse import urljoin
+
 import tornado
 import tornado.gen
 import tornado.web
@@ -18,12 +20,7 @@ class ProxyHandler(tornado.web.RequestHandler):
     @tornado.gen.coroutine
     def get(self, url=None):
         """Get the login page"""
-        url = url or self.proxy_url
-        if url is None:
-            if self.request.uri.startswith("/"):
-                url = self.request.uri[1:]
-            else:
-                url = self.request.uri
+        url = urljoin(self.proxy_url, url)
 
         req = tornado.httpclient.HTTPRequest(url)
         client = tornado.httpclient.AsyncHTTPClient()
