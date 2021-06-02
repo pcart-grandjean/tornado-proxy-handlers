@@ -2,7 +2,7 @@ import sys
 import logging
 import tornado.web
 import tornado.ioloop
-from .handlers import ProxyHandler, ProxyWSHandler
+from tornado_proxy_handlers.handlers import ProxyHandler, ProxyWSHandler
 
 
 def main(proxy_url):
